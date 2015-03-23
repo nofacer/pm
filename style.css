@@ -1,0 +1,18 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	padding:0px;
+	margin:0px;
+	font:12px "微软雅黑";
+	color:#000;
+	background-color: #FFF;
+	text-align:center
+}
+
+
+#apDiv1{	text-align:center}
+
+#MenuBar1 li {
+	text-align: center;
+}
