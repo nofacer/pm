@@ -1,0 +1,404 @@
+1 技术背景
+1.1 开源硬件平台
+1.1.1 ARDUINO
+Arduino，是一个开放源代码的单芯片微控制器，它使用了Atmel AVR单片机，采用了基于开放源代码的软硬件平台，建构于简易输出/输入（simple I/O）界面板，并且具有使用类似Java、C语言的Processing/Wiring开发环境。
+Arduino可以使用 Arduino 语言与 Macromedia Flash、Processing、Max/MSP、Pure Data和SuperCollider等软件，结合电子元件，例如开关或感测器或其他控制器件、LED、步进马达或其他输出装置，作出互动作品。Arduino也可以独立运作成为一个可以跟软件沟通的界面。
+
+特色：
+	基于知识共享开放源代码的电路图设计。
+	免费下载，也可依需求自己修改，但需遵照姓名标示。您必须按照作者或授权人所指定的方式，表彰其姓名。
+	依相同方式分享，若您改变或转变著作，当散布该衍生著作时，您需采用与本著作相同或类似的授权条款。
+	Arduino 可使用 ICSP 线上烧入器，将 Bootloader 烧入新的 IC 芯片。
+	可依据Arduino官方网站，取得硬件的设计档，加以调整电路板及元件，以符合自己实际设计的需求。
+	可简单地与感测器，各式各样的电子元件连接，如 红外线、超音波、热敏电阻、光敏电阻、伺服马达…等。
+	支援多样的互动程式，如 Adobe Flash, Max/MSP, VVVV, Pure Data, C, Processing… 等。
+	使用低价格的微处理控制器 (Atmel AVR) (ATMEGA 8,168,328等)。
+	USB 界面，不需外接电源。另外有提供直流(DC)电源输入。
+
+Arduino语言：
+int LED_PIN=13;  void setup () {     pinMode (LED_PIN, OUTPUT);     // 以數位輸出方式啟用Pin13}  void loop () {                     // loop副程式，重複不斷執行     digitalWrite (LED_PIN, HIGH);  // 打開LED     delay (1000);                  // 等待一秒，delay內含數值1000，代表延遲1000mS，即一秒。     digitalWrite (LED_PIN, LOW);   // 關閉LED     delay (1000);                  // 等待一秒}                                  // loop副程式結束
+ 
+一个Blink程序的截图。
+
+ARDUINO UNO：
+Arduino UNO是Arduino USB接口系列的最新版本，作为Arduino平台的参考标准模板。UNO的处理器核心是ATmega328，同时具有14路数字输入/输出口（其中6路可作为PWM输出），6路模拟输入，一个16MHz晶体振荡器，一个USB口，一个电源插座，一个ICSP header和一个复位按钮。UNO已经发布到第三版，与前两版相比有以下新的特点：
+	在AREF处增加了两个管脚SDA和SCL，支持I2C接口；增加IOREF和一个预留管脚，将来扩展板将能兼容5V和3.3V核心板。
+	改进了复位电路设计
+	USB接口芯片由ATmega16U2替代了ATmega8U2
+  
+
+ARDUINO UNO概要：
+	处理器 ATmega328
+	工作电压 5V
+	输入电压（推荐） 7-12V
+	输入电压（范围） 6-20V
+	数字IO脚 14 (其中6路作为PWM输出）
+	模拟输入脚 6
+	IO脚直流电流 40 mA
+	3.3V脚直流电流 50 mA
+	Flash Memory 32 KB （ATmega328，其中0.5 KB 用于 bootloader）
+	SRAM 2 KB （ATmega328）
+	EEPROM 1 KB （ATmega328）
+	工作时钟16MHz
+
+ 
+
+
+电源
+	Arduino UNO可以通过3种方式供电，而且能自动选择供电方式
+	外部直流电源通过电源插座供电。
+	电池连接电源连接器的GND和VIN引脚。
+	USB接口直接供电。
+	电源引脚说明
+	VIN --- 当外部直流电源接入电源插座时，可以通过VIN向外部供电；也可以通过此引脚向UNO直接供电；VIN有电时将忽略从USB或者其他引脚接入的电源。
+	5V --- 通过稳压器或USB的5V电压，为UNO上的5V芯片供电。
+	3.3V --- 通过稳压器产生的3.3V电压，最大驱动电流50mA。
+	GND --- 地脚。
+
+存储器
+ATmega328包括了片上32KB Flash，其中0.5KB用于Bootloader。同时还有2KB SRAM和1KB EEPROM。
+
+输入输出
+	14路数字输入输出口：工作电压为5V，每一路能输出和接入最大电流为40mA。每一路配置了20-50K欧姆内部上拉电阻（默认不连接)。除此之外，有些引脚有特定的功能
+	串口信号RX（0号）、TX（1号）: 与内部 ATmega8U2 USB-to-TTL 芯片相连，提供TTL电压水平的串口接收信号。
+	外部中断（2号和3号）：触发中断引脚，可设成上升沿、下降沿或同时触发。
+	脉冲宽度调制PWM（3、5、6、9、10 、11）：提供6路8位PWM输出。
+	SPI（10(SS)，11(MOSI)，12(MISO)，13(SCK)）：SPI通信接口。
+	LED（13号）：Arduino专门用于测试LED的保留接口，输出为高时点亮LED，反之输出为低时LED熄灭。
+	6路模拟输入A0到A5：每一路具有10位的分辨率（即输入有1024个不同值），默认输入信号范围为0到5V，可以通过AREF调整输入上限。除此之外，有些引脚有特定功能
+	TWI接口（SDA A4和SCL A5）：支持通信接口（兼容I2C总线）。
+	AREF：模拟输入信号的参考电压。
+	Reset：信号为低时复位单片机芯片。
+
+通信接口
+	串口：ATmega328内置的UART可以通过数字口0（RX）和1（TX）与外部实现串口通信；ATmega16U2可以访问数字口实现USB上的虚拟串口。
+	TWI（兼容I2C）接口：
+	SPI 接口：
+
+下载程序
+	Arduino UNO上的ATmega328已经预置了bootloader程序，因此可以通过Arduino软件直接下载程序到UNO中，参见[[]]。
+	可以直接通过UNO上ICSP header直接下载程序到ATmega328，参见[[]]。
+	ATmega16U2的Firmware（固件）也可以通过DFU工具升级，参见[[]]。
+
+
+1.1.2 RASPBERRY PI
+树莓派（英语：Raspberry Pi），是一款基于Linux系统的只有一张信用卡大小的单板机电脑。它由英国的树莓派基金会所开发，目的是以低价硬件及自由软件刺激在学校的基本的电脑科学教育。[4][5][6][7][8]
+树莓派的生产是通过有生产许可的两家公司：Element 14/Premier Farnell和RS Components。这两家公司都在网上出售树莓派。[9]
+树莓派配备一枚700MHz博通出产的ARM架构BCM2835处理器，256MB内存（B型已升级到512MB内存），使用SD卡当作存储媒体，且拥有一个Ethernet、两个USB接口、以及HDMI（支持声音输出）和RCA端子输出支持。树莓派只有一张信用卡大小，体积大概是一个火柴盒大小，可以运行像《雷神之锤III竞技场》的游戏和进行1080p视频的播放。操作系统采用开源的Linux系统如Debian、ArchLinux，自带的Iceweasel、KOffice等软件能够满足基本的网络浏览、文字处理以及电脑学习的需要。分A、B两种型号，售价分别是A型25美元、B型35美元。树莓派基金会从2012年2月29日开始接受B型的订货。[10]
+树莓派基金会提供了基于ARM架构的Debian、Arch Linux和Fedora等的发行版[11]供大众下载，还计划提供支持Python作为主要编程语言[12][13]，支持BBC BASIC[14](通过RISC OS映像或者Linux的"Brandy Basic"克隆)[15]、C语言和Perl等编程语言。
+到2014年10月，大约380万板卡树莓派已经售出。[16]
+2015年2月，树莓派基金会发布了第二代产品——树莓派2，售价35美元。[17]树莓派2采用4核Broadcom BCM2836 (ARMv7-A)芯片、双核VideoCore IV GPU和1GB内存，其余配置与树莓派B+型一致，除了支持第一代树莓派支持的操作系统外，树莓派2将能够运行Windows 10以及Snappy Ubuntu Core。
+
+硬件
+
+项目	A型	A+型	B型	B+型[40]
+B型 (第2代)
+上市价格	$25	$20	$35[41]
+
+SoC
+Broadcom BCM2835（CPU，GPU DSP和SDRAM, USB）[1]
+BroadcomBCM2836（CPU，GPU DSP和SDRAM, USB）
+
+CPU
+ARM1176JZF-S核心（ARM11系列）700MHz (宏内核)	ARM Cortex-A7(ARMv7系列) 900MHz (四核心)
+GPU
+Broadcom VideoCore IV[42], OpenGL ES 2.0, 1080p 30 h.264/MPEG-4 AVC高清解码器
+
+内存
+256 MB（与GPU共享，可以理解为集成显卡的显存与内存共享）	256MB, 512 MB（2012年10月15日打后）	1024 MB (LPDDR2)
+USB 2.0接口个数[43]
+1 （支持USB hub扩展）[44]
+2	4
+视频输入	15-针头 MIPI 相机 (CSI) 界面, 可被树莓派相机或树莓派相机(无红外线版)使用
+视频输出	视频用RCA端子（PAL & NTSC）, HDMI, HDMI界面可使用14种分辨率, 分别从640×350到1920×1200之间
+音源输入	I²S
+
+音源输出	3.5mm插孔，HDMI电子输出或I²S
+
+板载存储	SD / MMC / SDIO卡插槽
+MicroSD卡插槽
+SD / MMC / SDIO卡插槽
+MicroSD卡插槽
+
+网络接口	没有（需通过USB）	10/100 以太网接口（RJ45接口）
+
+外设	8个GPIO, 外加下列外设(亦可当作GPIO使用):UART、I²C、带两个选择的SPI总线，+3.3 V, +5 V, 地线	14个GPIO及HAT规格铺设	除A型所拥有之外设之外, 亦有4个GPIO可供用户使用(需自行焊接电路)	14个GPIO及HAT规格铺设
+额定功率	300 毫安培 每小时（1.5 瓦）[45]
+200 毫安培 每小时(1 瓦)	700 毫安培 每小时（3.5 瓦）	600 毫安培 每小时（3.0 瓦）	800 毫安培 每小时(4.0 瓦)
+电源输入	5V 电压 (通过MicroUSB或经GPIO输入)
+总体尺寸	85.60 × 53.98 毫米（3.370 × 2.125 英寸）	65 × 56.5 × 10 毫米（2.56 × 2.22 × 0.4 英寸）	85.60 × 53.98 毫米（3.370 × 2.125 英寸）
+重量	45 g（1.6 oz）	23 g（0.81 oz）	45 g（1.6 oz）
+	A型	A+型	B型	B+型	B型 (第2代)
+
+
+软件
+树莓派基金会使用基于Linux内核的操作系统。在2012年7月，基金会发布了目前它推荐使用的操作系统，Raspbian，这是基于Debian的Linux发行版，并对于树莓派的硬件的做了系统优化。
+
+操作系统（OS）[编辑]
+这是一个在树莓派上运行的操作系统（operating system, OS）的清单,包括已经移植好的或者正在被移植的过程中的：
+
+完整OS:
+	AROS
+	Windows 10
+	Linux
+	Android
+	Android 4.0 (Ice Cream Sandwich)[47]
+	Arch Linux ARM
+	Debian Squeeze
+	Firefox OS
+	Gentoo Linux[48]
+	Chromium OS
+	Raspberry Pi Fedora Remix
+	Raspbian[49] (Debian Wheezy port with faster floating point support)
+	Slackware ARM（formerly ARMedslack）
+	QtonPi a cross-platform application framework based Linux distribution based on the Qt framework
+	WebOS
+	Open webOS[50]
+	kano[51]
+	Plan 9 from Bell Labs[52]
+	RISC OS
+	Unix
+	FreeBSD[53]
+	NetBSD[54][55]
+
+
+多功能轻型发布版:
+	Moebius, a light ARM HF distribution based on Debian. It uses Raspbian repository, but it fits in a 1 GB SD card. It has just minimal services and its memory usage is optimized to keep a small footprint.
+	Squeezed Arm Puppy, a version of Puppy Linux（Puppi）for the ARMv6（sap6）specifically for the Raspberry Pi.[56]
+	单功能轻型发布版:
+	Instant WebKiosk a browser-only operating system
+	IPFire
+	OpenELEC
+	Raspbmc
+	XBMC
+	XBian
+
+
+1.2 编程语言
+1.2.1 C语言
+C是一种通用的编程语言，广泛用于系统软件与应用软件的开发。于1969年至1973年间，为了移植与开发UNIX操作系统，由丹尼斯•里奇与肯•汤普逊，以B语言为基础，在贝尔实验室设计、开发出来。
+C语言具有高效、灵活、功能丰富、表达力强和较高的可移植性等特点，在程序员中备受青睐，成为最近25年使用最为广泛的编程语言[2]。目前，C语言编译器普遍存在于各种不同的操作系统中，例如Microsoft Windows, Mac OS X, Linux, Unix等。C语言的设计影响了众多后来的编程语言，例如C++、Objective-C、Java、C#等。
+
+二十世纪八十年代，为了避免各开发厂商用的C语言语法产生差异，由美国国家标准局为C语言订定了一套完整的国际标准语法，称为ANSI C，作为C语言的标准。二十世纪八十年代至今的有关程序开发工具，一般都支持符合ANSI C的语法。
+1.2.2 PYTHON
+Python（英国发音：/ˈpaɪθən/ 美国发音：/ˈpaɪθɑːn/），是一种面向对象、直译式的计算机程序语言，具有近二十年的发展历史。它包含了一组功能完备的标准库，能够轻松完成很多常见的任务。它的语法简单，与其它大多数程序设计语言使用大括号不一样，它使用缩进来定义语句块。
+与Scheme、Ruby、Perl、Tcl等动态语言一样，Python具备垃圾回收功能，能够自动管理内存使用。它经常被当作脚本语言用于处理系统管理任务和网络程序编写，然而它也非常适合完成各种高级任务。Python虚拟机本身几乎可以在所有的作业系统中运行。使用一些诸如py2exe、PyPy、PyInstaller之类的工具可以将Python源代码转换成可以脱离Python解释器运行的程序。
+Python的官方解释器是CPython，该解释器用C语言编写，是一个由社区驱动的自由软件，目前由Python软件基金会管理。
+Python支持命令式程序设计、面向对象程序设计、函数式编程、面向侧面的程序设计、泛型编程多种编程范式。
+1.2.3 html
+超文本标记语言（英文：HyperText Markup Language，HTML）是为“网页创建和其它可在网页浏览器中看到的信息”设计的一种标记语言。HTML被用来结构化信息——例如标题、段落和列表等等，也可用来在一定程度上描述文档的外观和语义。1982年由蒂姆•伯纳斯-李创建，由IETF用简化的SGML（标准通用标记语言）语法进行进一步发展的HTML，后来成为国际标准，由万维网联盟（W3C）维护。
+HTML档案最常用的扩展名（扩展名）为.html，但是有如DOS等的旧操作系统限制扩展名最多为3个文字符号，所以.htm扩展名也允许使用。而如今.htm扩展名的使用较为减少。编者可以使用任何基本的文本编辑器（例如Notepad等）或所见即所得的HTML编辑器来编辑HTML文件。
+早期的HTML语法规则定义较为松散，这有助于不熟悉网络出版的人使用或变更。网页浏览器接受这类的文件，使之可以显示语法不严格的网页。随着时间的流逝，官方标准渐渐趋于严格的语法，但是浏览器继续显示一些仍不合乎标准的HTML。使用XML的严格规则的XHTML（可扩展超文本标记语言）是W3C计划中的HTML的接替者。虽然很多人认为它已经成为当前的HTML标准，但是它实际上是一个独立的、和HTML平行发展的标准。W3C目前建议使用XHTML 1.1、XHTML 1.0或者HTML 4.01标准编写网页，但已有许多网页转用较新的HTML5编码撰写（如Google）。
+1.2.4 php
+PHP（全称：PHP：Hypertext Preprocessor，即“PHP：超文本预处理器”）是一种开源的通用计算机脚本语言，尤其适用于网络开发并可嵌入HTML中使用。PHP的语法借鉴吸收C语言、Java和Perl等流行计算机语言的特点，易于一般程序员学习。PHP的主要目标是允许网络开发人员快速编写动态页面，但PHP也被用于其他很多领域。[1]
+PHP最初是由勒多夫在1995年开始开发的。而现在PHP的标准由PHP Group和开放源代码社区维护。PHP以PHP License作为许可协议，不过因为这个协议限制了PHP名称的使用，所以和开放源代码许可协议GPL不兼容。[2]
+PHP的应用范围相当广泛，尤其是在网页程序的开发上。一般来说PHP大多运行在网页服务器上，通过运行PHP代码来产生用户浏览的网页。PHP可以在多数的服务器和操作系统上运行，而且使用PHP完全是免费的。根据2013年4月的统计数据，PHP已经被安装在超过2亿4400万个网站和210万台服务器上[3]。
+PHP on Microsoft Windows PHP 5.5.22 / PHP 5.6.6 是由 Microsoft VC11 所编译；其将不支持旧有的 Windows XP 系统。支持 Windows XP 系统的最新版为 PHP 5.4.38，采用 Microsoft VC9 编译。
+
+2 作品设计与实现
+2.1 传感器
+传感器采用夏普DN7C3JA001。
+ 
+按照此电路图与ARDUINO相连.
+图
+ARDUINO上写程序
+
+
+2.2 上位机
+采用树莓派做上位机，接收ARDUINO通过串口传来的数据，并且作为服务器接入互联网。用户可以在全球的任何地方登陆我们的网站，查看服务器本地PM2.5数值以及其他用户上传的全球PM2.5数值。由于我们处于校园网，所以没有公网IP，因此搭建服务器需要“花生棒”进行内网穿透，来搭建服务器。
+服务器采用HTML与PHP混合编写。服务器提供的功能有：查看本地PM2.5曲线图；查看已上传全球PM2.5分布；上传自己检测的PM2.5数据。
+2.3 传感器与上位机通信
+ARDUINO通过串口发送检测的数据，树莓派上编写PYTHON程序监视串口，读入数据并写入CSV文件，供服务器PHP程序读取。
+ 
+Arduino串口发送数据
+ 
+树莓派串口接收数据
+3 作品测试与分析
+3.1 测试
+3.2 分析
+
+附录
+ARDUINO代码
+#include <Wire.h> 
+#include <OneWire.h>
+#include <DallasTemperature.h>
+
+#define ONE_WIRE_BUS 10 // 定义DS18B20数据口连接arduino的10号IO上
+
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);// 初始连接在单总线上的单总线设备
+
+#define measurePin  A5  // A5口读取传感器采样电压。
+#define ledPower  2    // pin2口，用来给PWM控制采样。
+
+#define samplingTime 280 // 这是采样脉冲周期，我们用了NPN三极管，所以高电平开启LED
+#define deltaTime 40 
+#define sleepTime 9680
+
+
+// DallasTemperature DS18B20..one wire  DS18B20传感器做温度修正。
+long startTime;
+int tempSeconds=20000;
+float air_Temp;
+
+
+float Ao,sum_Ao,average_Ao,Vo,Vs,dlt_Mv,pm2d5;
+float baseTemp=25.8;
+float noDust=550;  //Measurements in no dust! "mv"
+
+void setup() {
+
+  
+  Serial.begin(9600);
+  pinMode(ledPower,OUTPUT);
+  sensors.begin();
+  sensors.requestTemperatures(); // 发送命令获取温度
+  air_Temp=sensors.getTempCByIndex(0)-5;
+  startTime=millis();
+
+}
+
+void loop()
+{
+
+    for(int i=0;i<100;i++){
+    digitalWrite(ledPower,LOW);  
+    delayMicroseconds(280); 
+    Ao= analogRead(measurePin); 
+    delayMicroseconds(40); 
+    digitalWrite(ledPower,HIGH); 
+    delayMicroseconds(9680);   
+    sum_Ao=Ao+sum_Ao;  
+    
+    
+     
+  }
+
+  average_Ao=sum_Ao/100.0;
+  get_pm2d5(average_Ao);
+
+
+  Serial.println(pm2d5);
+
+  
+  sum_Ao=0;
+  average_Ao=0;
+   
+  delay(60000);
+
+}
+
+
+float get_pm2d5(float x){
+
+  Vo=(x/1024)*5000.0; //计算PM2.5具体可参考PDF
+  dlt_Mv=Vo-get_Vs();
+  pm2d5=0.6*dlt_Mv;  //此处0.6为经验K值，可根据实际测算，0.7或许也不错。
+  return pm2d5;
+
+}
+
+
+float get_temp(){
+
+  if (millis()-startTime>tempSeconds)
+  {
+    sensors.requestTemperatures(); // 发送命令获取温度
+    air_Temp=sensors.getTempCByIndex(0)-5;
+    startTime=millis();
+  }
+  return air_Temp;
+
+}
+
+float get_Vs()  //此处是修正基准电压Vs漂移的。
+{
+  get_temp();
+  //air_Temp=20; 如果手头没有温度传感器，可以这里指定一个测试温度。
+  if(air_Temp < 40 && air_Temp > -10)
+  {
+    float dlt_Temp= baseTemp-air_Temp;
+    Vs=noDust-6*dlt_Temp;
+  }
+  else if( air_Temp>=40 )
+  {
+    float dlt_Temp= baseTemp-40;
+    Vs=noDust-((dlt_Temp)*6-(air_Temp-40)*1.5);
+  }
+
+  return Vs;
+
+}
+
+Python代码
+import serial
+ser=serial.Serial('Com3',9600)
+while True:
+    print ser.readline()
+    fileHandle=open('test.csv','a')
+    fileHandle.write(ser.readline())
+    fileHandle.close()
+
+
+PHP绘图代码
+<?php   
+ /* CAT:Line chart */
+
+ /* pChart library inclusions */
+ include("pChart2.1.4/class/pData.class.php");
+ include("pChart2.1.4/class/pDraw.class.php");
+ include("pChart2.1.4/class/pImage.class.php");
+
+
+ /* Create and populate the pData object */
+ $MyData = new pData();  
+ $MyData->ImportFromCSV("test.csv");
+
+
+
+
+
+ /* Create the pChart object */
+ $myPicture = new pImage(960,580,$MyData);
+
+ /* Turn of Antialiasing */
+ $myPicture->Antialias = FALSE;
+
+ /* Add a border to the picture */
+ $myPicture->drawRectangle(0,0,959,579,array("R"=>0,"G"=>0,"B"=>0));
+ 
+ /* Write the chart title */ 
+ $myPicture->setFontProperties(array("FontName"=>"pChart2.1.4/fonts/Forgotte.ttf","FontSize"=>11));
+ $myPicture->drawText(150,35,"Pm2.5 detective online system --local monitoring",array("FontSize"=>20,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
+
+ /* Set the default font */
+ $myPicture->setFontProperties(array("FontName"=>"pChart2.1.4/fonts/pf_arma_five.ttf","FontSize"=>6));
+
+ /* Define the chart area */
+ $myPicture->setGraphArea(60,40,900,540);
+
+ /* Draw the scale */
+ $scaleSettings = array("XMargin"=>10,"YMargin"=>10,"Floating"=>TRUE,"GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
+ $myPicture->drawScale($scaleSettings);
+
+ /* Turn on Antialiasing */
+ $myPicture->Antialias = TRUE;
+
+ /* Draw the line chart */
+ $myPicture->drawLineChart();
+
+ /* Write the chart legend */
+ $myPicture->drawLegend(540,20,array("Style"=>LEGEND_NOBORDER,"Mode"=>LEGEND_HORIZONTAL));
+
+ /* Render the picture (choose the best way) */
+ $myPicture->autoOutput("pChart2.1.4/examples/pictures/example.drawLineChart.simple.png");
+?>
+
+
+网页代码
+Index.html
+Location.html
+Upload.html
+Aboutus.html
+Upload.php
+
